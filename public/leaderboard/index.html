@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaderboard - Clean! Cut! Action!</title>
+  <meta name="description" content="Top Rookies of Clean! Cut! Action!: best scores and fastest clean sets.">
+  <link rel="icon" href="/assets/clapperboard.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/leaderboard/style.css">
+</head>
+<body>
+  <main class="stage">
+    <section class="card" aria-labelledby="title">
+      <img class="corner corner-tl" src="/assets/rig_light.png" alt="">
+      <img class="corner corner-tr" src="/assets/camera_rig.png" alt="">
+      <img class="corner corner-bl" src="/assets/film_roll.png" alt="">
+      <img class="corner corner-br" src="/assets/director_chair.png" alt="">
+
+      <header class="head">
+        <div class="banner">
+          <img src="/assets/clapperboard.png" alt="">
+          <h1 id="title">LEADERBOARD</h1>
+          <img src="/assets/megaphone.png" alt="">
+        </div>
+        <p class="subtitle">
+          <img src="/assets/film.png" alt="">
+          <span>CLEAN! CUT! ACTION!&nbsp;&nbsp;-&nbsp;&nbsp;Scene 42: The Cafe&nbsp;&nbsp;-&nbsp;&nbsp;Wall of Fame</span>
+          <img src="/assets/film.png" alt="">
+        </p>
+      </header>
+
+      <div class="stats">
+        <div class="chip"><img src="/assets/director_chair.png" alt=""><span><b id="stat-players">-</b> Rookies on the board</span></div>
+        <div class="chip"><img src="/assets/coins.png" alt=""><span>Top score <b id="stat-top">-</b></span></div>
+        <div class="chip"><img src="/assets/timer.png" alt=""><span>Fastest clean set <b id="stat-fastest">-</b></span></div>
+      </div>
+
+      <section id="you" class="you" hidden>
+        <img src="/assets/diamond.png" alt="">
+        <div class="you-text">
+          <div class="you-label">YOUR PLACE</div>
+          <div id="you-line" class="you-line"></div>
+        </div>
+      </section>
+
+      <div class="toolbar">
+        <label class="search">
+          <span class="sr-only">Search by name</span>
+          <input id="search" type="search" placeholder="Find a Rookie..." maxlength="24" autocomplete="off">
+        </label>
+        <button id="refresh" class="btn" type="button">Refresh</button>
+      </div>
+
+      <div class="table" role="table" aria-label="Leaderboard">
+        <div class="row row-head" role="row">
+          <span role="columnheader">#</span>
+          <span role="columnheader">Rookie</span>
+          <span role="columnheader" class="num">Best score</span>
+          <span role="columnheader" class="num">Best time</span>
+          <span role="columnheader" class="num hide-sm">Runs</span>
+        </div>
+        <div id="rows" role="rowgroup"></div>
+        <p id="status" class="status">Loading the call sheet...</p>
+      </div>
+
+      <nav class="pager" aria-label="Pages">
+        <button id="prev" class="btn" type="button">&larr; Prev</button>
+        <span id="page" class="page"></span>
+        <button id="next" class="btn" type="button">Next &rarr;</button>
+      </nav>
+
+      <footer class="foot">
+        <p><b>Ranking:</b> best score first; ties go to the faster best time. "Best time" counts only runs where every prop got back on its mark.</p>
+        <p>You are identified by your browser - change your name on the briefing screen before you start a take.</p>
+      </footer>
+    </section>
+  </main>
+  <script src="/leaderboard/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+# Leaderboard + Caddy (automatic HTTPS for cca.ohmcodes.com).
+#   docker compose up -d --build            leaderboard + Caddy
+#   docker compose up -d --build leaderboard  leaderboard only (you already run nginx/Traefik/etc.)
+# See DEPLOY_DOCKER.md.
+
+services:
+  leaderboard:
+    build: .
+    image: cca-leaderboard:latest
+    container_name: cca-leaderboard
+    restart: unless-stopped
+    init: true
+    environment:
+      PORT: "8787"
+      TRUST_PROXY: "1"
+      WRITE_LIMIT_PER_MIN: "30"
+      MAX_SCORE: "100000"
+      MIN_RUN_SECONDS: "10"
+    volumes:
+      - leaderboard-data:/app/data
+    # Only reachable from this machine. Caddy talks to it over the compose network.
+    ports:
+      - "127.0.0.1:8787:8787"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: cca-caddy
+    restart: unless-stopped
+    depends_on:
+      - leaderboard
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  leaderboard-data:
+  caddy-data:
+  caddy-config:
